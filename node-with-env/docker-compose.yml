@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  node-front:
+    build:
+      context: ./
+      dockerfile: .docker/node-front/Dockerfile
+      args:
+        - HOST=${HOST}
+        - PORT=${PORT}
+    networks:
+      brig-front-dev:
+        ipv4_address: ${HOST}
+
+networks:
+  brig-front-dev:
+    name: dev-env
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${SUBNET}
